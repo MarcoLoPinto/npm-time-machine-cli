@@ -36,6 +36,7 @@ program
     .command("install")
     .argument("[packages...]", "Packages to install")
     .option("--fallback", "Allow fallback to oldest version if none match date")
+    .option("--allow-prerelease", "Include pre-release versions in version resolution")
     .description("Install dependencies using frozen time")
     .action(async (packages = [], options) => {
         try {
@@ -43,10 +44,11 @@ program
             const targetDate = new Date(date);
 
             console.log(`⏳ Installing with frozen date ${date}`);
-            console.log(`⚙️ Mode: ${options.fallback ? "fallback" : "strict"}`);
+            console.log(`⚙️ Mode: ${options.fallback ? "fallback" : "strict"}${options.allowPrerelease ? ", prerelease enabled" : ""}`);
 
             const proxy = await startProxy(targetDate, {
-                allowFallback: options.fallback || false
+                allowFallback: options.fallback || false,
+                allowPrerelease: options.allowPrerelease || false
             });
 
             try {

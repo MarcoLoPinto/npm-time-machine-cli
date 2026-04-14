@@ -48,14 +48,14 @@ This saves your target date to `.npm-time-machine/config.json`.
 
 Install packages using the frozen date:
 
+**Install all dependencies from `package.json`:**
 ```bash
 ntm install
 ```
 
-or 
-
+**Install specific packages:**
 ```bash
-ntm install <package>
+ntm install express lodash
 ```
 
 Only versions published **before or on** the target date will be installed.
@@ -64,6 +64,10 @@ Only versions published **before or on** the target date will be installed.
 - `--fallback` - If no version exists before the date, use the oldest available version
   ```bash
   ntm install --fallback
+  ```
+- `--allow-prerelease` - Include pre-release versions (e.g., alpha, beta, rc) in version resolution
+  ```bash
+  ntm install --allow-prerelease
   ```
 
 **Install specific packages:**
@@ -169,8 +173,7 @@ The proxy randomly selects ports. If you get port errors, try again—it should 
 |---------|---------|
 | `ntm set <date>` | Set target date (YYYY-MM-DD format) |
 | `ntm install [packages...]` | Install with frozen timeline |
-| `ntm install --fallback` | Install with fallback mode enabled |
-| `ntm verify [date]` | Verify packages match a date |
+| `ntm install --fallback` | Install with fallback mode enabled || `ntm install --allow-prerelease` | Install including pre-release versions || `ntm verify [date]` | Verify packages match a date |
 | `ntm reset` | Remove ntm configuration |
 
 ## 🛡️ Security Considerations

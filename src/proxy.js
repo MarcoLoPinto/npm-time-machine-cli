@@ -8,7 +8,7 @@ import { promisify } from "util";
 const streamPipeline = promisify(pipeline);
 
 export async function startProxy(targetDate, options = {}) {
-    const { allowFallback = false } = options;
+    const { allowFallback = false, allowPrerelease = false } = options;
 
     const app = express();
 
@@ -67,7 +67,7 @@ export async function startProxy(targetDate, options = {}) {
                     if (
                         new Date(time) <= targetDate &&
                         data.versions[version] &&
-                        !semver.prerelease(version) // Exclude pre-releases, we want only stable versions
+                        (allowPrerelease || !semver.prerelease(version)) // Exclude pre-releases unless explicitly allowed
                     ) {
                         filtered[version] = data.versions[version];
                     }
@@ -127,7 +127,7 @@ export async function startProxy(targetDate, options = {}) {
     const port = server.address().port;
 
     console.log(`⏳ NTM proxy running on http://localhost:${port}`);
-    console.log(`⚙️ Mode: ${allowFallback ? "fallback enabled" : "strict"}`);
+    console.log(`⚙️ Mode: ${allowFallback ? "fallback enabled" : "strict"}${allowPrerelease ? ", prerelease enabled" : ""}`);
 
     return {
         port,
