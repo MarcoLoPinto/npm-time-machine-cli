@@ -173,7 +173,9 @@ The proxy randomly selects ports. If you get port errors, try again—it should 
 |---------|---------|
 | `ntm set <date>` | Set target date (YYYY-MM-DD format) |
 | `ntm install [packages...]` | Install with frozen timeline |
-| `ntm install --fallback` | Install with fallback mode enabled || `ntm install --allow-prerelease` | Install including pre-release versions || `ntm verify [date]` | Verify packages match a date |
+| `ntm install --fallback` | Install with fallback mode enabled |
+| `ntm install --allow-prerelease` | Install including pre-release versions |
+| `ntm verify [date]` | Verify packages match a date |
 | `ntm reset` | Remove ntm configuration |
 
 ## 🛡️ Security Considerations
