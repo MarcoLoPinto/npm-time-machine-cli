@@ -1,4 +1,8 @@
-# ⏳ ntm: npm time machine
+<p align="center">
+  <img src="assets/logo.png" width="300"/>
+</p>
+
+<h1 align="center">NTM: NPM Time Machine</h1>
 
 Reproduce your npm dependency tree as it existed at a specific point in time.
 
@@ -23,13 +27,13 @@ Supply chain attacks and breaking changes often come from newly published versio
 ## 📦 Installation
 
 ```bash
-npm install -g npm-time-machine
+npm install -g npm-time-machine-cli
 ```
 
 Or use with `npx`:
 
 ```bash
-npx npm-time-machine <command>
+npx npm-time-machine-cli <command>
 ```
 
 ## 🎯 Usage
@@ -69,11 +73,6 @@ Only versions published **before or on** the target date will be installed.
   ```bash
   ntm install --allow-prerelease
   ```
-
-**Install specific packages:**
-```bash
-ntm install express lodash
-```
 
 ### 3️⃣ Verify Packages
 
@@ -138,7 +137,7 @@ ntm verify 2023-12-31
 
 ## ⚠️ Important Notes
 
-- **Requires Node 16+** - Uses ES modules
+- **Requires Node 18+** - Uses ES modules
 - **Local Proxy** - Creates a temporary local server (doesn't modify global npm config)
 - **Package Lock** - Works best with existing `package-lock.json` (or `npm-shrinkwrap.json`)
 - **Offline** - Still requires internet to fetch package metadata
