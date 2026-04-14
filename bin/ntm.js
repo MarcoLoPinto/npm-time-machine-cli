@@ -44,7 +44,7 @@ program
             const targetDate = new Date(date);
 
             console.log(`⏳ Installing with frozen date ${date}`);
-            console.log(`⚙️ Mode: ${options.fallback ? "fallback" : "strict"}${options.allowPrerelease ? ", prerelease enabled" : ""}`);
+            console.log(`⚙️  Mode: ${options.fallback ? "fallback" : "strict"}${options.allowPrerelease ? ", prerelease enabled" : ""}`);
 
             const proxy = await startProxy(targetDate, {
                 allowFallback: options.fallback || false,

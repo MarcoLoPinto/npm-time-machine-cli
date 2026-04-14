@@ -127,7 +127,7 @@ export async function startProxy(targetDate, options = {}) {
     const port = server.address().port;
 
     console.log(`⏳ NTM proxy running on http://localhost:${port}`);
-    console.log(`⚙️ Mode: ${allowFallback ? "fallback enabled" : "strict"}${allowPrerelease ? ", prerelease enabled" : ""}`);
+    console.log(`⚙️  Mode: ${allowFallback ? "fallback enabled" : "strict"}${allowPrerelease ? ", prerelease enabled" : ""}`);
 
     return {
         port,
