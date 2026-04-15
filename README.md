@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/logo.png" width="300"/>
+  <img src="https://raw.githubusercontent.com/MarcoLoPinto/npm-time-machine-cli/main/assets/logo.png" width="300"/>
 </p>
 
 <h1 align="center">NTM: NPM Time Machine</h1>
@@ -10,7 +10,7 @@ Reproduce your npm dependency tree as it existed at a specific point in time.
 
 Supply chain attacks and breaking changes often come from newly published versions of dependencies.
 
-`npm-time-machine` lets you:
+`npm-time-machine-cli` lets you:
 
 - Install dependencies as they existed in the past
 - Avoid recently introduced malicious or unstable versions
@@ -197,7 +197,7 @@ Contributions welcome! Feel free to open issues or submit pull requests on GitHu
 
 ```bash
 # 1. Install globally
-npm install -g npm-time-machine
+npm install -g npm-time-machine-cli
 
 # 2. Set a date in your project
 cd your-project
