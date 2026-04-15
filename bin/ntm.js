@@ -1,14 +1,17 @@
 #!/usr/bin/env node
 
 import { Command } from "commander";
+import { createRequire } from "module";
 import { saveConfig, loadConfig } from "../src/config.js";
 
+const require = createRequire(import.meta.url);
+const { version } = require("../package.json");
 const program = new Command();
 
 program
     .name("ntm")
     .description("npm time machine")
-    .version("1.0.0");
+    .version(version);
 
 // SET
 program
