@@ -1,6 +1,6 @@
 {
   "name": "npm-time-machine-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Install npm dependencies as they existed at a given date",
   "type": "module",
   "bin": {
