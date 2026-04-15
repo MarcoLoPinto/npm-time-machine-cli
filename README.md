@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/MarcoLoPinto/npm-time-machine-cli/main/assets/logo.png" width="300"/>
+  <img src="https://raw.githubusercontent.com/MarcoLoPinto/npm-time-machine-cli/refs/heads/master/assets/logo.png" width="300"/>
 </p>
 
 <h1 align="center">NTM: NPM Time Machine</h1>
