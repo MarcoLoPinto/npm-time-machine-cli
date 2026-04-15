@@ -4,7 +4,7 @@
   "description": "Install npm dependencies as they existed at a given date",
   "type": "module",
   "bin": {
-    "ntm": "./bin/ntm.js"
+    "ntm": "bin/ntm.js"
   },
   "scripts": {
     "test": "node --test tests/**/*.test.js"
@@ -12,7 +12,7 @@
   "author": "Marco Lo Pinto",
   "repository": {
     "type": "git",
-    "url": "https://github.com/MarcoLoPinto/npm-time-machine-cli"
+    "url": "git+https://github.com/MarcoLoPinto/npm-time-machine-cli.git"
   },
   "homepage": "https://github.com/MarcoLoPinto/npm-time-machine-cli#readme",
   "license": "MIT",
