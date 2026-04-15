@@ -6,6 +6,9 @@
   "bin": {
     "ntm": "./bin/ntm.js"
   },
+  "scripts": {
+    "test": "node --test tests/**/*.test.js"
+  },
   "author": "Marco Lo Pinto",
   "repository": {
     "type": "git",

@@ -1,10 +1,6 @@
 #!/usr/bin/env node
 
 import { Command } from "commander";
-import { startProxy } from "../src/proxy.js";
-import { runInstall } from "../src/installer.js";
-import { resetProject } from "../src/reset.js";
-import { verifyProject } from "../src/verify.js";
 import { saveConfig, loadConfig } from "../src/config.js";
 
 const program = new Command();
@@ -40,6 +36,9 @@ program
     .description("Install dependencies using frozen time")
     .action(async (packages = [], options) => {
         try {
+            const { startProxy } = await import("../src/proxy.js");
+            const { runInstall } = await import("../src/installer.js");
+
             const { date } = loadConfig();
             const targetDate = new Date(date);
 
@@ -77,6 +76,8 @@ program
     .description("Verify installed dependencies against a date")
     .action(async (dateArg) => {
         try {
+            const { verifyProject } = await import("../src/verify.js");
+
             let date;
 
             if (dateArg) {
@@ -104,6 +105,7 @@ program
     .command("reset")
     .description("Remove ntm configuration")
     .action(async () => {
+        const { resetProject } = await import("../src/reset.js");
         await resetProject();
     });
 

@@ -1,7 +1,7 @@
 import express from "express";
 import fetch from "node-fetch";
-import semver from "semver";
 import { getCache, setCache } from "./cache.js";
+import { filterVersionsByDate, updateDistTags } from "./version-filter.js";
 import { pipeline } from "stream";
 import { promisify } from "util";
 
@@ -58,58 +58,30 @@ export async function startProxy(targetDate, options = {}) {
             const data = await response.json();
 
             // filter versions
-            if (data.versions && data.time) {
-                const filtered = {};
+            const filterResult = filterVersionsByDate(data, targetDate, {
+                allowFallback,
+                allowPrerelease
+            });
 
-                for (const [version, time] of Object.entries(data.time)) {
-                    if (["created", "modified"].includes(version)) continue;
-
-                    if (
-                        new Date(time) <= targetDate &&
-                        data.versions[version] &&
-                        (allowPrerelease || !semver.prerelease(version)) // Exclude pre-releases unless explicitly allowed
-                    ) {
-                        filtered[version] = data.versions[version];
-                    }
-                }
-
-                // No versions before date
-                if (Object.keys(filtered).length === 0) {
-                    if (allowFallback) {
-                        console.warn(`⚠ No versions before date for ${req.url}`);
-
-                        const allVersions = Object.keys(data.versions || {});
-                        const oldest = allVersions.sort(semver.compare)[0];
-
-                        if (oldest) {
-                            filtered[oldest] = data.versions[oldest];
-                            console.warn(`⚠ Fallback to oldest version: ${oldest}`);
-                        } else {
-                            return res.status(404).send("No versions available");
-                        }
-
-                    } else {
-                        console.error(
-                            `❌ No versions available before ${targetDate.toISOString()} for ${req.url}`
-                        );
-                        return res
-                            .status(404)
-                            .send("No valid versions before selected date");
-                    }
-                }
-
-                data.versions = filtered;
-
-                // update dist-tags
-                const versions = Object.keys(filtered);
-
-                if (versions.length > 0) {
-                    const latest = versions.sort(semver.rcompare)[0];
-
-                    data["dist-tags"] = data["dist-tags"] || {};
-                    data["dist-tags"].latest = latest;
-                }
+            if (filterResult === null) {
+                console.error(
+                    `❌ No versions available before ${targetDate.toISOString()} for ${req.url}`
+                );
+                return res
+                    .status(404)
+                    .send("No valid versions before selected date");
             }
+
+            if (filterResult.fallback) {
+                console.warn(`⚠ No versions before date for ${req.url}`);
+                console.warn(`⚠ Fallback to oldest version: ${filterResult.fallbackVersion}`);
+            }
+
+            // Update data with filtered versions
+            data.versions = filterResult.versions;
+
+            // Update dist-tags
+            updateDistTags(data, filterResult);
 
             // set cache
             setCache(req.url, data);
